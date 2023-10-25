@@ -1,11 +1,8 @@
-import { Image, StyleSheet } from "react-native";
 
-import EditScreenInfo from "../../components/EditScreenInfo";
-import { Text, View } from "../../components/Themed";
 import { FlatList } from "react-native-gesture-handler";
-import BlogItem from "../../components/BlogItem";
-import useBlogs from "../../services/useBlogs";
-import { Blog } from "../../domains/Blog";
+import BlogItem from "@/components/BlogItem";
+import { View } from "@/components/Themed";
+import useBlogs from "@/services/useBlogs";
 
 export default function TabOneScreen() {
   const { blogs } = useBlogs();
@@ -19,7 +16,6 @@ export default function TabOneScreen() {
     <View>
       <FlatList
         data={blogs}
-        ItemSeparatorComponent={() => <View className="h-12" />}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => <BlogItem domain={item} />}
       />
