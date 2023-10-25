@@ -22,11 +22,4 @@ export class Blog {
     this.image = image;
     this.createdBy = createdBy;
   }
-
-  async fetchBlog() {
-    var asset = Asset.fromModule(require('markdown/1.md'));
-    // const c = FileSystem.readAsStringAsync('../markdown/1.md')
-
-    console.log(asset)
-  }
 }

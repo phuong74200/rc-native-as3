@@ -2,6 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Blog } from "../domains/Blog";
 import { faker } from "@faker-js/faker";
 import randomImage from "../utils/randomImage";
+import randomContent from "@/utils/randomContent";
 
 type Item = {
   id: string;
@@ -18,7 +19,7 @@ type Item = {
 const mock: Item[] = new Array(20).fill(null).map(() => ({
   id: faker.string.uuid(),
   title: faker.lorem.sentence(),
-  content: faker.lorem.paragraphs({ min: 15, max: 20 }),
+  content: randomContent(),
   image: randomImage(),
   createdBy: {
     id: faker.string.uuid(),

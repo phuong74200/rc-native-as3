@@ -8,7 +8,6 @@ export default function useBlog(id: string) {
   useEffect(() => {
     (async () => {
       const blog = await BlogStore.getOne(id);
-      await blog?.fetchBlog();
       setBlog(blog);
     })();
   }, []);
