@@ -6,6 +6,7 @@ import {
 } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
 import { useColorScheme } from "react-native";
 
@@ -56,12 +57,9 @@ function RootLayoutNav() {
         <Stack.Screen
           name="blog/[id]/index"
           options={{
-            presentation: "modal",
             headerShown: false,
-            statusBarHidden: true,
           }}
         />
-        <Stack.Screen name="modal" options={{ presentation: "modal" }} />
       </Stack>
     </ThemeProvider>
   );

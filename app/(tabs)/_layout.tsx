@@ -28,6 +28,7 @@ export default function TabLayout() {
         options={{
           title: "Tab One",
           tabBarIcon: ({ color }) => <TabBarIcon name="list" color={color} />,
+          headerShown: false,
         }}
       />
       <Tabs.Screen
@@ -35,6 +36,7 @@ export default function TabLayout() {
         options={{
           title: "Tab Two",
           tabBarIcon: ({ color }) => <TabBarIcon name="heart" color={color} />,
+          headerShown: false,
         }}
       />
     </Tabs>
