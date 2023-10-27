@@ -1,31 +1,37 @@
-import { StyleSheet } from 'react-native';
-
-import EditScreenInfo from '../../components/EditScreenInfo';
-import { Text, View } from '../../components/Themed';
+import BlogItem from "@/components/BlogItem";
+import { Empty } from "@/components/Empty";
+import Filter from "@/components/Filter";
+import useGetBlogs from "@/services/blog";
+import { tags } from "@/utils/randomTag";
+import { StatusBar } from "expo-status-bar";
+import { FlatList } from "react-native-gesture-handler";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function TabTwoScreen() {
+  const { query } = useGetBlogs();
+
+  const bookmarked = query({ bookmarked: true, tags: ["1"] });
+
+  console.log(bookmarked)
+
+  if (!bookmarked || bookmarked.length <= 0)
+    return (
+      <SafeAreaView>
+        <StatusBar />
+        <Filter tags={tags} />
+        <Empty />
+      </SafeAreaView>
+    );
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/two.tsx" />
-    </View>
+    <SafeAreaView>
+      <StatusBar />
+      <FlatList
+        data={bookmarked}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => <BlogItem domain={item} />}
+        ListHeaderComponent={<Filter tags={tags} />}
+      />
+    </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});

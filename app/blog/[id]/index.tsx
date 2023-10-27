@@ -3,7 +3,7 @@ import Bookmark from "@/components/Bookmark";
 import CustomMarkDown from "@/components/CustomMarkDown";
 import TagList from "@/components/TagList";
 import UserSection from "@/components/UserSection";
-import useBlog from "@/services/useBlog";
+import useGetBlogs from "@/services/blog";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { useLocalSearchParams, useNavigation } from "expo-router";
@@ -18,7 +18,8 @@ export default function BlogDetailScreen() {
     id: string;
   }>();
 
-  const { blog } = useBlog(id);
+  const { query } = useGetBlogs();
+  const blog = query({ id })[0];
 
   return (
     <SafeAreaView>

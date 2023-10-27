@@ -1,24 +1,30 @@
 import { Blog } from "@/domains/Blog";
-import useBlog from "@/services/useBlog";
+import useGetBlogs, { useMutateBlog } from "@/services/blog";
 import { FontAwesome } from "@expo/vector-icons";
 import { TouchableNativeFeedback, View } from "react-native";
 
 export default function Bookmark({ blog }: { blog: Blog | undefined | null }) {
-  const { bookmark, blog: state } = useBlog(blog?.id);
+  const { updateOne } = useMutateBlog();
 
   const handleBookmark = () => {
     if (!blog) return;
-    bookmark(blog.id, !state?.bookmarked);
+
+    updateOne(blog.id, {
+      bookmarked: !blog.bookmarked,
+    });
   };
 
   return (
     <View className="h-8 w-8 overflow-hidden rounded-[28px]">
-      <TouchableNativeFeedback onPress={handleBookmark}>
+      <TouchableNativeFeedback
+        onPress={handleBookmark}
+        background={TouchableNativeFeedback.Ripple("#e7f5ff", true)}
+      >
         <View className="h-8 w-8 flex justify-center items-center">
-          {state?.bookmarked ? (
-            <FontAwesome name="bookmark" size={16} color="black" />
+          {blog?.bookmarked ? (
+            <FontAwesome name="bookmark" size={16} color="#74c0fc" />
           ) : (
-            <FontAwesome name="bookmark-o" size={16} color="black" />
+            <FontAwesome name="bookmark-o" size={16} color="#74c0fc" />
           )}
         </View>
       </TouchableNativeFeedback>
